@@ -14,6 +14,19 @@
 import argparse
 from string import Template
 
+def createDS(id, ds_temp):
+    
+    # Create a new file
+    id = id.rstrip()
+    newFile = id + '.JSON'
+    ds = open(newFile,"w+")
+        
+    for entry in ds_temp:
+        if entry[0] != "#":
+            ds.write(entry)
+            
+    ds.close()
+
 
 def main(files):
 
@@ -27,21 +40,10 @@ def main(files):
     
     for id in id_list:
 
-        # Create a new file
-        id = id.rstrip()
-        newFile = id + '.JSON'
-        #newFile = newFile.rstrip()
-        ds = open(newFile,"w+")
-        ds_temp = open("DS_JSON_temp.txt","r")
+        ds_temp=open("DS_JSON_temp.txt","r")        
+        createDS(id, ds_temp)
+        ds_temp.close()
         
-        for entry in ds_temp:
-            if entry[0] != "#":
-                ds.write(entry)
-
-        ds.close()
-        
-        
-
     id_list.close()
 
     
