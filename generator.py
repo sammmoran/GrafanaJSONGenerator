@@ -1,3 +1,15 @@
+# FileName: generator.py
+# Author: Samuel Moran
+# Created: 7/9/2019
+
+# Description:
+# This program generates JSON files for Grafana. It generates two JSON files:
+# 1) one Data Source file, 2) another Dash Board file. These files are then
+# fed into Grafana to automate DashBoard creation with panels.
+# This program is part of a larger project to automate data feeding for
+# DevOps observation.
+
+
 
 import argparse
 from string import Template
