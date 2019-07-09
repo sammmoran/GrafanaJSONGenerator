@@ -5,6 +5,6 @@
 name
 "type":"cloudwatch",
 "url":"http://monitoring.us-east-1.amazonaws.com",
-"access":"proxy"
+"access":"proxy",
 "database":"trp-usis-dev",
 "jsonData":{"authType":"credentials","customMetricsNamespaces":"AWS/ECS","defaultRegion":"us-east-1"}
