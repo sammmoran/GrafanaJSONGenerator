@@ -17,37 +17,43 @@ from string import Template
 
 def main(files):
 
-    #Construct JSON Data Source and Dash Board feed files for Grafana
-    ds = open("DS_feed.JSON","w+")
-    db = open("DB_feed.JSON","w+")
+    # Construct JSON Data Source and Dash Board feed files for Grafana
+    #ds = open("DS_feed.JSON","w+")
+    #db = open("DB_feed.JSON","w+")
 
-    #Open the id file
+    # Open the id file
     id_list = open("id_list.txt","r")
 
+    
     for id in id_list:
-        print(id)
 
+        # Create a new file
+        id = id.rstrip()
+        newFile = id + '.JSON'
+        #newFile = newFile.rstrip()
+        ds = open(newFile,"w+")
+        ds_temp = open("DS_JSON_temp.txt","r")
+        
+        for entry in ds_temp:
+            if entry[0] != "#":
+                ds.write(entry)
+
+        ds.close()
+        
+        
 
     id_list.close()
 
     
-    #We are done with creating the JSON files
-    ds.close()
-    db.close()
-    
-
-
-
-
-#Program starts here
+# Program starts here
 if __name__=="__main__":
 
     parser = argparse.ArgumentParser()
     parser.add_argument('file',nargs='+',help='path to the file')
 
-    #Parse the files separately
+    # Parse the files separately
     args_namespace=parser.parse_args()
     args=vars(args_namespace)['file']
 
-    #Send files to main function
+    # Send files to main function
     main(args)
