@@ -12,39 +12,61 @@
 
 
 import argparse
-from string import Template
 
+
+# This function will create the Data Source JSON file from nothing
+# and populate it with information from the DS_JSON_temp file.
+# The end result of this function is a Data Source JSON file to be
+# fed into Grafana.
 def createDS(id, ds_temp):
     
-    # Create a new file
+    # Create a new file using the Instance ID name
     id = id.rstrip()
     newFile = id + '.JSON'
     ds = open(newFile,"w+")
-        
+
+    ds.write("{")
+    
+    # Construct the Data Source template file using DS_JSON_temp.txt
     for entry in ds_temp:
-        if entry[0] != "#":
+
+        # If just a regular line, simply add it to the JSON file
+        if entry[0] != "#" and entry[0] != "$" and entry[0] != " ":
             ds.write(entry)
-            
+
+        # If the line contains a template header, modify it accordingly
+        if entry[0] == "$":
+            ds.write('"name":"' + id + '",'+"\n")
+
+    ds.write("}")
+    
     ds.close()
 
 
 def main(files):
 
-    # Construct JSON Data Source and Dash Board feed files for Grafana
-    #ds = open("DS_feed.JSON","w+")
-    #db = open("DB_feed.JSON","w+")
-
     # Open the id file
     id_list = open("id_list.txt","r")
 
-    
+    # Iterate through the AWS Instances list
     for id in id_list:
 
-        ds_temp=open("DS_JSON_temp.txt","r")        
+        # Open the DS template file temporarily
+        ds_temp = open("DS_JSON_temp.txt","r")
+
+        # Pass to CreateDS function
         createDS(id, ds_temp)
+
+        # Close the DS template file
         ds_temp.close()
-        
+
+
+    # JSON Data Source and Dash Board files have been created...
+
+    # Close the id list
     id_list.close()
+
+    # This program has reached its end...
 
     
 # Program starts here
