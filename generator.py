@@ -30,14 +30,20 @@ def createDS(id, ds_temp):
     # Construct the Data Source template file using DS_JSON_temp.txt
     for entry in ds_temp:
 
+        if entry == 'name\n':
+            newEntry = '"name":"' + id + '",\n'
+            ds.write(newEntry)
+            
         # If just a regular line, simply add it to the JSON file
-        if entry[0] != "#" and entry[0] != "$" and entry[0] != " ":
+        if entry[0] != "#" and entry != 'name\n':
             ds.write(entry)
 
         # If the line contains a template header, modify it accordingly
-        if entry[0] == "$":
-            ds.write('"name":"' + id + '",'+"\n")
+        #if entry[0] == "$":
+        #ds.write('"name":' + id + '",'+"\n")
 
+       
+        
     ds.write("}")
     
     ds.close()
