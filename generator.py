@@ -22,7 +22,7 @@ def createDS(id, ds_temp):
     
     # Create a new file using the Instance ID name
     id = id.rstrip()
-    newFile = id + '.JSON'
+    newFile = id + '.json'
     ds = open(newFile,"w+")
 
     ds.write("{")
