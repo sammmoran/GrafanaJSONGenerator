@@ -2,6 +2,7 @@
 # This file will be fed into generate.py to create the final Data Source
 # JSON file that will be fed into Grafana. The user may modify the
 # default settings; however this is not generally advised.
+
 name
 "type":"cloudwatch",
 "url":"http://monitoring.us-east-1.amazonaws.com",
